@@ -12,8 +12,12 @@ const defaultFormFields = {
 }
 
 const SignUpForm = (props) => {
-    const [formFields, setFromFields] = useState(defaultFormFields);
+    const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
+    const resetFormFields = () => {
+        setFormFields(defaultFormFields);
+      };
+    
     const handleSubmit = async (event) => {
         event.preventDefault()
         if (password !== confirmPassword) {
@@ -30,13 +34,13 @@ const SignUpForm = (props) => {
     const handleChange = (event) => {
         const { name, value } = event.target;
         console.log(event)
-        setFromFields((prevState) => { return { ...prevState, [name]: value } });
+        setFormFields({ ...formFields, [name]: value });
     }
     return (
         <div className='sign-up-container'>
             <h2>Don't have an account</h2>
             <span>Sign up with your email and password</span>
-            <form onSubmit={() => { }}>
+            <form onSubmit={handleSubmit}>
                 <FormInput
                     label='Display Name'
                     type='text'
@@ -65,7 +69,7 @@ const SignUpForm = (props) => {
                     name='confirmPassword'
                     value={confirmPassword}
                     onChange={handleChange} />
-                <Button buttonType='google' type='submit'>Sign Up</Button>
+                <Button buttonType='inverted' type='submit'>Sign Up</Button>
             </form>
 
         </div>
