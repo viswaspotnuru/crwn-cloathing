@@ -37,8 +37,6 @@ const Home = () => {
       <Outlet />
     </div>
   );
-
-
 };
 
 export default Home;
